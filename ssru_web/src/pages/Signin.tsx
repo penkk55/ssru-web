@@ -1,4 +1,5 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,11 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { SettingsApplicationsTwoTone } from '@mui/icons-material';
+import Swal from 'sweetalert2';
+import swal from 'sweetalert';
+import { fail } from 'assert';
+ 
 
 function Copyright(props: any) {
   return (
@@ -28,15 +34,59 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
+async function loginUser(credentials) {
+  return fetch('https://www.mecallapi.com/api/login',{
+    method: 'POST',
+    headers : { 
+      'Content-Type': 'application/json',
+      //'Accept': 'application/json'
+     },
+    body: JSON.stringify(credentials)
+  })
+  .then(data => data.json()) 
+}
 export default function Signin() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit  = async e => {
+    e.preventDefault();
+    const res = await loginUser({
+      username,
+      password
     });
-  };
+    console.log(res)
+    if('accessToken' in res) {
+      swal("Success", res.message, "success", {
+       // showConfirmButton:false,
+       // buttons: false,
+       buttons: {
+        cancel: { text: 'Cancel' },
+        confirm: false,
+      },
+        timer: 2000
+      })
+      .then((value) => {
+        localStorage.setItem('accessToken', res.accessToken);
+        localStorage.setItem('user', JSON.stringify(res.user))
+        window.location.href= "/profile";
+      });
+      //const buttons: boolean =  buttons as boolean;
+    } else {
+      swal("Failed", res.message, "error");
+    }
+  }
+
+//  //old function from Mui
+//   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+//     event.preventDefault();
+//     const data = new FormData(event.currentTarget);
+//     console.log({
+//       email: data.get('email'),
+//       password: data.get('password'),
+//     });
+    
+//   };
 
   return (
     <ThemeProvider theme={theme}>
@@ -82,6 +132,7 @@ export default function Signin() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange ={e => setUserName(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -92,11 +143,12 @@ export default function Signin() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={ e => setPassword(e.target.value)}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
