@@ -1,14 +1,24 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Signin from './signin'
+import Signin from './pages/Signin';
+import Profile from './pages/Profile';
+import {  Routes, Route} from "react-router-dom";
+import AppHeader from './AppHeader';
 
 function App() {
   return (
     <div className="App">
-      <Signin/>
+      <AppHeader/>
+      <Routes>
+          {/* <Route path ="/" element={<App />}/> */}
+          <Route path="profile" element={<Profile />} />
+          <Route path="signin" element={<Signin />} /> 
+      </Routes>
+
+
       
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -21,7 +31,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
     </div>
   );
 }
