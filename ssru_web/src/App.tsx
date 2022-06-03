@@ -1,17 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+ import React from 'react';
+// import logo from './logo.svg';
+// import './App.css';
 import Signin from './pages/Signin';
 import Profile from './pages/Profile';
 import {  Routes, Route} from "react-router-dom";
 import AppHeader from './AppHeader';
+import Homepage  from './pages/Homepage';
 
 function App() {
   return (
     <div className="App">
       <AppHeader/>
       <Routes>
-          {/* <Route path ="/" element={<App />}/> */}
+          <Route path ="/" element={<Homepage />}/>
           <Route path="profile" element={<Profile />} />
           <Route path="signin" element={<Signin />} /> 
       </Routes>
