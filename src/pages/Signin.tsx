@@ -32,10 +32,10 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme();
-
+const theme = createTheme(); 
+// http://localhost:8081/api/login https://www.mecallapi.com/api/login
 async function loginUser(credentials) {
-  return fetch('https://herokussru.herokuapp.com/api/login',{
+  return fetch('https://herokussru.herokuapp.com/api/login',{ //https://herokussru.herokuapp.com/api/login // https://www.mecallapi.com/api/login
     method: 'POST',
     headers : { 
       'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function Signin() {
         cancel: { text: 'Cancel' },
         confirm: false,
       },
-        timer: 2000
+        timer: 20000
       })
       .then((value) => {
         localStorage.setItem('accessToken', res.accessToken);
