@@ -4,7 +4,7 @@
 import Button from '@mui/material/Button';
  import logo from '../logo.svg';
  import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { red } from '@material-ui/core/colors';
+import { red } from '@mui/material/colors';
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
 
