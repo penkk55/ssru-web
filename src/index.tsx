@@ -24,9 +24,9 @@ root.render(
 reportWebVitals();
 
 
-{/* <Routes>
-<Route path ="/" element={<App />}>
-<Route path="Profile" element={<Profile />} />
-<Route path="Signin" element={<Signin />} /> 
-</Route>
-</Routes> */}
+// {/* <Routes>
+// <Route path ="/" element={<App />}>
+// <Route path="Profile" element={<Profile />} />
+// <Route path="Signin" element={<Signin />} /> 
+// </Route>.
+// </Routes> */}
