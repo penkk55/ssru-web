@@ -34,8 +34,10 @@ function Copyright(props: any) {
 
 const theme = createTheme(); 
 // http://localhost:8081/api/login https://www.mecallapi.com/api/login
+// https://herokussru.herokuapp.com//api/loginNew/loginNewV1
+//https://herokussru.herokuapp.com/api/login
 async function loginUser(credentials) {
-  return fetch('https://herokussru.herokuapp.com/api/login',{ //https://herokussru.herokuapp.com/api/login // https://www.mecallapi.com/api/login
+  return fetch('https://herokussru.herokuapp.com/api/loginNew/loginNewV1',{ //https://herokussru.herokuapp.com/api/login // https://www.mecallapi.com/api/login
     method: 'POST',
     headers : { 
       'Content-Type': 'application/json',
@@ -55,7 +57,9 @@ export default function Signin() {
       username,
       password
     });
-    console.log(res)
+    console.log('---->',res)
+    console.log('---->2',res.data)
+    console.log('---->3',res.data.username)
     if('accessToken' in res) {
       swal("Success", res.message, "success", {
        // showConfirmButton:false,
@@ -68,7 +72,7 @@ export default function Signin() {
       })
       .then((value) => {
         localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('user', JSON.stringify(res.user))
+        localStorage.setItem('data', JSON.stringify(res.data))
         window.location.href= "/profile";
       });
       //const buttons: boolean =  buttons as boolean;
