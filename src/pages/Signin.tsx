@@ -59,7 +59,7 @@ export default function Signin() {
     });
     console.log('---->',res)
     console.log('---->2',res.data)
-    console.log('---->3',res.data.username)
+    // console.log('---->3',res.data.username)
     if('accessToken' in res) {
       swal("Success", res.message, "success", {
        // showConfirmButton:false,
@@ -76,9 +76,13 @@ export default function Signin() {
         window.location.href= "/profile";
       });
       //const buttons: boolean =  buttons as boolean;
-    } else {
+    } 
+    if(res.status=== "error"){
       swal("Failed", res.message, "error");
     }
+    //   else {
+    //   swal("FailedELSE", res.message, "errorELSE");
+    // }
   }
 
 //  //old function from Mui
